@@ -6,16 +6,15 @@
 
 <script>
   import {ref} from 'vue'
-  import axios from 'axios'
+  import {fetchApi} from './api/index'
   export default {
     setup() {
       const data = ref([]);
-      axios.get('https://ghibliapi.herokuapp.com/films')
+      fetchApi()
       .then(response => {
         data.value = response.data
       })
       .catch(err => console.log(err));
-
       return {      
         data
       }
