@@ -5,16 +5,13 @@
 </template>
 
 <script>
-  import {ref} from 'vue'
-  import {fetchApi} from './api/index'
+  import {computed} from 'vue'
+  import {useStore} from 'vuex'
   export default {
     setup() {
-      const data = ref([]);
-      fetchApi()
-      .then(response => {
-        data.value = response.data
-      })
-      .catch(err => console.log(err));
+      const store = useStore();
+      store.dispatch('fetchMovieList');
+      const data = computed(() => store.getters.getMovieList);
       return {      
         data
       }
